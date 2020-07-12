@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Find Restaurant</string>
+    <string name="namarestoran">Kopi Shop</string>
+    <string name="rangeharga">IDR 5000</string>
+    <string name="rating">4.5</string>
+    <string name="address">Address this</string>
+    <string name="Klik">Tap For Detail</string>
+    <string name="totalrt">(12)</string>
+    <string name="status">Online</string>
+</resources>
