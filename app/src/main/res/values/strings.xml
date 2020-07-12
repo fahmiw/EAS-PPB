@@ -7,4 +7,10 @@
     <string name="Klik">Tap For Detail</string>
     <string name="totalrt">(12)</string>
     <string name="status">Online</string>
+    <string name="detail_resto">Menjual Coffee</string>
+    <string name="open">Buka (5pm-10pm)</string>
+    <string name="nama_reviewer">Febriyoga Ganteng</string>
+    <string name="labelKomen">COMMENT &amp; REVIEW</string>
+    <string name="Review">Ajib bet dah</string>
+    <string name="more_photos">More Photos</string>
 </resources>
