@@ -1,6 +1,10 @@
 # EAS-PPB
 Untuk memenuhi Tugas Besar PPB
 
+# Author
+- Adhitya Febhiakbar 
+- Elza Esterina
+- Fahmi Widianto
 
 # Spesification
 Bangunlah sebuah aplikasi katalog restoran dengan mengkonsumsi data dari zomato API
