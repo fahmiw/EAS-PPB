@@ -7,15 +7,11 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import com.example.findrestoran.Data.RestoItem
-import com.example.findrestoran.Data.DataResto
 import com.example.findrestoran.Data.listRestaurants
 import com.example.findrestoran.MVP.RestoPresenter
 import com.example.findrestoran.MVP.RestoView
 import com.example.findrestoran.Model.RestoAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity(), RestoView {
 
@@ -26,8 +22,8 @@ class MainActivity : AppCompatActivity(), RestoView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val progressBar = findViewById<ProgressBar>(R.id.pb_home)
-        val itemAdapter = findViewById<RecyclerView>(R.id.rv_main)
+        progressBar = findViewById(R.id.pb_home)
+        itemAdaper = findViewById(R.id.rv_main)
         val presenter = RestoPresenter(this)
         presenter.discoverResto()
 
