@@ -1,8 +1,8 @@
 package com.example.findrestoran.Model
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,10 +34,11 @@ class RestoAdapter(private val result: List<listRestaurants>) : RecyclerView.Ada
                 } else {
                     "Online"
                 }
-                itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailResto::class.java)
-
-                    itemView.context.startActivity(intent)
+                itemView.setOnClickListener { v ->
+                    val context: Context = v.context
+                    val intent = Intent(context, DetailResto::class.java)
+                    intent.putExtra(DetailResto.ID_RESTO, restaurant.descRestaurant)
+                    context.startActivity(intent)
                 }
             }
         }

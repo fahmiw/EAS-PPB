@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/resto_name"
+            android:id="@+id/resto_namerev"
             style="@style/TextContent.Small.White"
             android:layout_gravity="left"
             android:layout_marginStart="15dp"
@@ -35,7 +35,7 @@
             android:background="@color/colorPrimaryDark">
 
             <ImageView
-                android:id="@+id/detail_food_img"
+                android:id="@+id/detail_food_img_rev"
                 android:layout_width="385dp"
                 android:layout_height="200dp"
                 android:layout_margin="12dp"
@@ -82,6 +82,7 @@
                 android:textStyle="bold"
                 tools:ignore="DuplicateIds" >
             </TextView>
+
             <TextView
                 android:id="@+id/bukatoko"
                 style="@style/TextContent.Small.White"
@@ -91,19 +92,19 @@
                 android:layout_marginEnd="15dp"
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
+                android:maxLines="1"
                 android:padding="8dp"
                 android:text="@string/open"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:ignore="DuplicateIds,RtlCompat" >
-            </TextView>
+                tools:ignore="DuplicateIds,RtlCompat"></TextView>
 
         </RelativeLayout>
         <FrameLayout
             android:layout_width="235dp"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/shape2"
             android:layout_marginBottom="5dp">
@@ -128,10 +129,10 @@
         </FrameLayout>
         <FrameLayout
             android:layout_width="150dp"
-            android:layout_height="136dp"
+            android:layout_height="150dp"
             android:layout_gravity="right"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="-142dp"
+            android:layout_marginTop="-152dp"
             android:background="@drawable/shape"
             android:layout_marginBottom="5dp">
             <TextView
@@ -187,10 +188,9 @@
             </TextView>
         </FrameLayout>
 
-        <FrameLayout
+        <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView2"
                 android:layout_width="match_parent"
-                android:background="@drawable/shape"
                 android:layout_margin="10dp"
                 android:layout_height="125dp"/>
 
@@ -208,15 +208,22 @@
             android:textColor="@android:color/white"
             android:textStyle="bold">
         </TextView>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RestoranRev"
-            android:layout_below="@+id/Labelkomen"
-            android:layout_width="match_parent"
-            android:layout_height="173dp"
-            android:layout_marginTop="5dp"
-            tools:listitem="@layout/item_review" >
-        </androidx.recyclerview.widget.RecyclerView>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:id="@+id/csdetail"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Labelkomen">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RestoranRev"
+                    android:layout_width="match_parent"
+                    android:layout_height="173dp"
+                    android:layout_marginTop="5dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="@id/csdetail"
+                    tools:listitem="@layout/item_review" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>
