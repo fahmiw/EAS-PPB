@@ -28,7 +28,6 @@ import retrofit2.Response
 class DetailResto : AppCompatActivity() {
     companion object {
         const val ID_RESTO = "id_restaurant"
-        const val ID_REST = " "
     }
 
     @SuppressLint("SetTextI18n")
