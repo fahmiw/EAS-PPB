@@ -13,22 +13,30 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.findrestoran.Data.DataResto
 import com.example.findrestoran.Data.DescRestaurant
-import com.example.findrestoran.Data.RestoItem
 import com.example.findrestoran.Data.ReviewItem
-import com.example.findrestoran.MainActivity
+import com.example.findrestoran.Data.review
 import com.example.findrestoran.NetworkProvider
 import com.example.findrestoran.R
-import com.google.android.gms.maps.MapView
-import kotlinx.android.synthetic.main.detail_restoran.*
-import kotlinx.android.synthetic.main.item_row_resto.view.*
+import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
+import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.maps.MapView
+import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailResto : AppCompatActivity() {
+
+class DetailResto : AppCompatActivity(), OnMapReadyCallback, MapboxMap.OnMapClickListener {
     companion object {
         const val ID_RESTO = "id_restaurant"
     }
+
+    val mapView: MapView? = null
+    var mapboxMap: MapboxMap? = null
+    var data: DescRestaurant? = null
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,8 +67,12 @@ class DetailResto : AppCompatActivity() {
             starReview.rating = bundle.UserRating.aggregate_rating.toFloat()
             val allReview = findViewById<TextView>(R.id.review)
             allReview.text = "(" + bundle.UserRating.votes + ")"
-//            val coordinate = findViewById<MapView>(R.id.mapView2)
-//            coordinate.add
+
+            // Maps
+            Mapbox.getInstance(this, "pk.eyJ1IjoiYW5kaWZhdXp5NyIsImEiOiJja2Npa2o4Y2Uwa3ZhMnRvZTY4YjUwOTBuIn0.V2U0Cys-qY9IIoSCVFHu4g")
+            val mapView = findViewById(R.id.mapView2) as MapView
+            mapView.onCreate(savedInstanceState)
+            mapView.getMapAsync(this)
         }
         val dataReview = NetworkProvider.providesHttpAdapter().create(DataResto::class.java)
         dataReview.discoverRestaurantFromReview().enqueue(object : Callback<ReviewItem>{
@@ -77,4 +89,60 @@ class DetailResto : AppCompatActivity() {
         })
 
     }
+    override fun onMapReady(mapboxMap: MapboxMap?) {
+        this.mapboxMap = mapboxMap
+        mapboxMap?.addOnMapClickListener(this)
+    }
+
+    override fun onMapClick(point: LatLng) {
+        val position = CameraPosition.Builder()
+            .target(LatLng(data!!.location.latitude.toDouble(), data!!.location.longitude.toDouble()))
+            .zoom(17.0) // Sets the zoom
+            .bearing(180.0) // Rotate the camera
+            .tilt(30.0) // Set the camera tilt
+            .build()
+        mapboxMap?.animateCamera(
+            CameraUpdateFactory
+                .newCameraPosition(position), 7000)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView?.onResume()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView?.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView?.onStop()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView?.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView?.onSaveInstanceState(outState)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView?.onLowMemory()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapboxMap?.removeOnMapClickListener(this)
+        mapView?.onDestroy()
+    }
+
 }
+
+
+
